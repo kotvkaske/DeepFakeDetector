@@ -44,3 +44,6 @@ def graph_spectrogram(wave,rate,path):
     ax.axis('off')
     fig.savefig(path, dpi=90, frameon='false')
     return 1
+
+def patch_apply(x):
+    return torch.tensor([[x,x],[x,x]],dtype=torch.float32)

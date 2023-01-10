@@ -29,8 +29,7 @@ from training.trainerold import train_old
 batch_size = 20
 image_size = 224
 
-def patch_apply(x):
-    return torch.tensor([[x,x],[x,x]],dtype=torch.float32)
+
 
 TRAIN = pd.read_csv('data/FINAL_TRAIN_P2.csv')
 TEST = pd.read_csv('data/FINAL_TEST_P2.csv')

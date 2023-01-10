@@ -1,10 +1,6 @@
 import numpy as np
 import torch
 
-from data.chaos import Chaos
-from data.hippocampus import Hippocampus
-
-
 class Config():
     def __init__(self):
         super(Config, self).__init__()
@@ -14,10 +10,8 @@ def load_config(exp_id):
     cfg = Config()
     ''' Experiment '''
     cfg.experiment_idx = exp_id
-    cfg.trial_id = None
 
-    cfg.save_dir_prefix = 'Experiment_'  # prefix for experiment folder
-    cfg.name = 'voxel2mesh'
+    cfg.name = 'DF'
 
     ''' 
     **************************************** Paths ****************************************
@@ -26,16 +20,6 @@ def load_config(exp_id):
     '''
     cfg.save_path = None  # UPDATE HERE <<<<<<<<<<<<<<<<<<<<<<
     cfg.dataset_path = None  # UPDATE HERE <<<<<<<<<<<<<<<<<<<<<<
-
-    # cfg.save_path = '/your/path/to/experiments/miccai2020/' # results will be saved here
-    # cfg.dataset_path = '/your/path/to/dataset' # path to the dataset
-
-    # Initialize data object for.
-    # Hippocampus() for hippocampus and Chaos() for liver dataset.
-
-    cfg.data_obj = None  # UPDATE HERE <<<<<<<<<<<<<<<<<<<<<<
-    # cfg.data_obj = Chaos()
-    # cfg.data_obj = Hippocampus()
 
     assert cfg.save_path != None, "Set cfg.save_path in config.py"
     assert cfg.dataset_path != None, "Set cfg.dataset_path in config.py"
@@ -53,6 +37,7 @@ def load_config(exp_id):
     cfg.augmentation_shift_range = 10
 
     ''' Model '''
+    cfg.base_detector =
     cfg.first_layer_channels = 16
     cfg.num_input_channels = 1
     cfg.steps = 4
@@ -71,7 +56,6 @@ def load_config(exp_id):
     cfg.numb_of_itrs = 300000
     cfg.eval_every = 1000  # saves results to disk
 
-    # ''' Rreporting '''
-    # cfg.wab = True # use weight and biases for reporting
+
 
     return cfg
