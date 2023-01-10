@@ -7,7 +7,7 @@ from torchvision.io import read_video
 from torchvision.io import read_image
 import torchvision
 from facenet_pytorch import MTCNN
-from lib.utils import *
+from utils import *
 import warnings
 warnings.filterwarnings("ignore")
 

@@ -6,7 +6,7 @@ import numpy as np
 from PIL import Image
 from torch.utils.data import Dataset, DataLoader
 import torchvision.transforms as tt
-from lib.utils import AddGaussianNoise
+# from lib.utils import AddGaussianNoise
 
 class DeepFakeDataset(Dataset):
     """
@@ -39,7 +39,9 @@ class DeepFakeDataset(Dataset):
                          std=[0.229, 0.224, 0.225]),
             tt.RandomHorizontalFlip(p=0.3),
             tt.RandomRotation(degrees=7),
-            AddGaussianNoise(p=0.5,mean=0,std=0.15)])
+            # AddGaussianNoise(p=0.5,mean=0,std=0.15)
+        ]
+    )
         transform_test = tt.Compose([
             tt.Resize(224),
             tt.CenterCrop(224),
