@@ -53,3 +53,4 @@ res = train_old(model,optimizer,loss,50,train_dataset,test_dataset,False,'models
 from metrics.evaluate import Evaluator
 checker = Evaluator(type_of_model='av',loss_fn=nn.BCELoss(),patch_v=True)
 checker.estimate_dataset(test_dataset,model)
+checker
