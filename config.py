@@ -18,12 +18,11 @@ def load_config(exp_id):
     save_path: results will be saved at this location
     dataset_path: dataset must be stored here.
     '''
-    cfg.save_path = None  # UPDATE HERE <<<<<<<<<<<<<<<<<<<<<<
-    cfg.dataset_path = None  # UPDATE HERE <<<<<<<<<<<<<<<<<<<<<<
-
+    cfg.save_path = '../../Загрузки/FakeAVCeleb_v1.2/CUSTOM/'  # UPDATE HERE <<<<<<<<<<<<<<<<<<<<<<
+    cfg.dataset_path = '../../Загрузки/FakeAVCeleb_v1.2/' # UPDATE HERE <<<<<<<<<<<<<<<<<<<<<<
+    cfg.need_preprocess = True
     assert cfg.save_path != None, "Set cfg.save_path in config.py"
     assert cfg.dataset_path != None, "Set cfg.dataset_path in config.py"
-    assert cfg.data_obj != None, "Set cfg.data_obj in config.py"
 
     ''' 
     ************************************************************************************************
@@ -31,13 +30,12 @@ def load_config(exp_id):
 
     ''' Dataset '''
     # input should be cubic. Otherwise, input should be padded accordingly.
-    cfg.patch_shape = (64, 64, 64)
-
-    cfg.ndims = 3
-    cfg.augmentation_shift_range = 10
+    cfg.train_test_split = 0.7
+    cfg.frames_per_video = 3
+    cfg.shuffle_data = True
 
     ''' Model '''
-    cfg.base_detector =
+    #cfg.base_detector =
     cfg.first_layer_channels = 16
     cfg.num_input_channels = 1
     cfg.steps = 4
