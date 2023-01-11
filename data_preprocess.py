@@ -9,4 +9,4 @@ class FakeAVCeleb():
         self.data_path = cfg.dataset_path
 
     def preprocess(self):
-
+        fakeA_fakeV =
