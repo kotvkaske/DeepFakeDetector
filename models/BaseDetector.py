@@ -113,25 +113,7 @@ class DeepFakeDetector(nn.Module):
             preds,_ = torch.mode(torch.flatten(preds,start_dim=1,end_dim=2))
         return self.apply_answer(preds.detach().cpu().numpy())
     
-    def predict_video(self,video):
-        """Process Image/Video classification
-        video: mkv/avi/...
-            Input video.
-            
-        Returns
-        -------
-        Whether video fake or not
-        """
-        frames,audio,info = read_video(video)
-        res, confidence = self.extractor(frames,return_prob=True)
-        confidence = torch.Tensor(confidence)
-        res = torch.stack(res)
-        indices  = (confidence>self.confidence_face).squeeze(dim=1)
-        faces = res[indices]
-        if audio.size(1)==0:
-            return self.image_classifier(faces[0])
-        else:
-            return self.av_classifier(faces,audio,info)
+
     
     def predict_image(self,img):
         img = (read_image(img).to(DEVICE))/255

@@ -33,9 +33,8 @@ def load_config(exp_id):
     cfg.train_test_split = 0.7
     cfg.frames_per_video = 3
     cfg.shuffle_data = True
-
     ''' Model '''
-    #cfg.base_detector =
+    cfg.face_confidence = 0.9
     cfg.first_layer_channels = 16
     cfg.num_input_channels = 1
     cfg.steps = 4
