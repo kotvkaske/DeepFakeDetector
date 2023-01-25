@@ -43,6 +43,7 @@ def graph_spectrogram(wave,rate,path):
     pxx, freqs, bins, im = ax.specgram(x=wave, Fs=rate, noverlap=384, NFFT=512)
     ax.axis('off')
     fig.savefig(path, dpi=90, frameon='false')
+    plt.close()
     return 1
 
 def patch_apply(x):
