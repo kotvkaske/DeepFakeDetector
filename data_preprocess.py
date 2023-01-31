@@ -15,9 +15,9 @@ from torchvision.io import read_video
 cfg = load_config(0)
 
 
-class FakeAVCeleb():
+class FakeAVCelebPreprocessing():
     def __init__(self, cfg, mode):
-        super(FakeAVCeleb, self).__init__()
+        super(FakeAVCelebPreprocessing, self).__init__()
         assert (mode in ['train', 'test']), "Dataset mode must be train or test"
         self.cfg = cfg
         if cfg.need_preprocess:

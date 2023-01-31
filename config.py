@@ -33,6 +33,10 @@ def load_config(exp_id):
     cfg.train_test_split = 0.7
     cfg.frames_per_video = 3
     cfg.shuffle_data = True
+    ''' Image Size '''
+    cfg.image_size = 224
+    cfg.spectrgram_size = 224
+    cfg.upsampled_spectgram_size = 512
     ''' Model '''
     cfg.face_confidence = 0.9
     cfg.first_layer_channels = 16
