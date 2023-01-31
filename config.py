@@ -18,9 +18,10 @@ def load_config(exp_id):
     save_path: results will be saved at this location
     dataset_path: dataset must be stored here.
     '''
+    cfg.dataset_size = 1500
     cfg.save_path = '../../Загрузки/FakeAVCeleb_v1.2/CUSTOM/'  # UPDATE HERE <<<<<<<<<<<<<<<<<<<<<<
     cfg.dataset_path = '../../Загрузки/FakeAVCeleb_v1.2/' # UPDATE HERE <<<<<<<<<<<<<<<<<<<<<<
-    cfg.need_preprocess = True
+    cfg.need_preprocess = False
     assert cfg.save_path != None, "Set cfg.save_path in config.py"
     assert cfg.dataset_path != None, "Set cfg.dataset_path in config.py"
 
@@ -28,15 +29,17 @@ def load_config(exp_id):
     ************************************************************************************************
     '''
 
-    ''' Dataset '''
+    ''' Dataset Preprocessing '''
     # input should be cubic. Otherwise, input should be padded accordingly.
     cfg.train_test_split = 0.7
     cfg.frames_per_video = 3
     cfg.shuffle_data = True
-    ''' Image Size '''
-    cfg.image_size = 224
-    cfg.spectrgram_size = 224
-    cfg.upsampled_spectgram_size = 512
+    ''' Preprocessed Dataset parameters'''
+
+    cfg.image_size = 96
+    cfg.spectrgram_size = 96
+    cfg.upsampled_spectgram_size = 768
+
     ''' Model '''
     cfg.face_confidence = 0.9
     cfg.first_layer_channels = 16

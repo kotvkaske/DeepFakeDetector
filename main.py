@@ -3,4 +3,6 @@ from data.dataset import CelebVADataset
 
 cfg = load_config(0)
 
-FakeAVCelebDataset = FakeAVCelebPreprocessing(cfg, mode='train')
+PreprocessingStep = FakeAVCelebPreprocessing(cfg)
+data = CelebVADataset(cfg,'train')
+
