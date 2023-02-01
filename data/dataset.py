@@ -9,8 +9,8 @@ from PIL import Image
 from torch.utils.data import Dataset, DataLoader
 import torchvision.transforms as tt
 
+from transform import *
 
-# from lib.utils import AddGaussianNoise
 
 class CelebVADataset(Dataset):
     """
@@ -34,6 +34,7 @@ class CelebVADataset(Dataset):
     def __init__(self, cfg, mode):
         """Initialize module."""
         super(CelebVADataset, self).__init__()
+        self.mode = mode
         self.cfg = cfg
         assert (mode in ['train', 'test']), "Unknown Data Mode"
         self.data = self.cfg.save_path + mode + '/'
@@ -56,29 +57,20 @@ class CelebVADataset(Dataset):
 
     def __getitem__(self, index):
         """Return sample of dataset"""
-        sample = self.data.iloc[index]
-        class_ind = torch.tensor(sample['class'], dtype=torch.float32)
+        sample = self.pd_data.iloc[index]
+        class_ind = torch.tensor(int(sample['is_real']), dtype=torch.float32)
         sample_path = sample['path']
         l = os.listdir(sample_path)
         l = np.array(l)
-        spec = l[np.array([i.split('/')[-1].startswith('spec') for i in l])].item()
-        path_to_images = l[np.array([i.split('/')[-1].startswith('img') for i in l])][:self.T]
-        if self.transform_image:
-            images = [self.transform_image(torchvision.io.read_image(sample_path + '/' + i)) for i in path_to_images]
-        else:
-            images = [torchvision.io.read_image(sample_path + '/' + i) for i in path_to_images]
-        if self.transform_upsampled_audio:
-            spec_up = self.transform_upsampled_audio(torchvision.io.read_image(sample_path + '/' + spec))
-        else:
-            spec_up = torchvision.io.read_image(sample_path + '/' + spec)
 
-        if self.transform_default_audio:
-            spec_d = self.transform_default_audio(torchvision.io.read_image(sample_path + '/' + spec))
-        else:
-            spec_d = torchvision.io.read_image(sample_path + '/' + spec)
-        if self.img_only:
-            return images[0] / 255, class_ind
-        images = torch.stack((images))
+        spec = l[np.array([i.split('/')[-1].startswith('spec') for i in l])].item()
+        path_to_images = l[np.array([i.split('/')[-1].startswith('img') for i in l])]
+        transf = Transformation(self.mode, self.cfg)
+        images = torch.stack(
+            [transf.transformation_image(torchvision.io.read_image(sample_path + '/' + i)) for i in path_to_images])
+        spec_up = transf.transformation_spc_concat(torchvision.io.read_image(sample_path + '/' + spec))
+        spec_d = transf.transformation_spc_default(torchvision.io.read_image(sample_path + '/' + spec))
+
         images = images.view(self.T * 3, 96, 96)
         images = images / 255
         spec_up = spec_up / 255

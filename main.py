@@ -5,4 +5,5 @@ cfg = load_config(0)
 
 PreprocessingStep = FakeAVCelebPreprocessing(cfg)
 data = CelebVADataset(cfg,'train')
+print(data[0])
 
