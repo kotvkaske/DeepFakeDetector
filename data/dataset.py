@@ -9,7 +9,7 @@ from PIL import Image
 from torch.utils.data import Dataset, DataLoader
 import torchvision.transforms as tt
 
-from transform import *
+from data.transform import *
 
 
 class CelebVADataset(Dataset):
@@ -71,7 +71,7 @@ class CelebVADataset(Dataset):
         spec_up = transf.transformation_spc_concat(torchvision.io.read_image(sample_path + '/' + spec))
         spec_d = transf.transformation_spc_default(torchvision.io.read_image(sample_path + '/' + spec))
 
-        images = images.view(self.T * 3, 96, 96)
+        images = images.view(3*3, 96, 96)
         images = images / 255
         spec_up = spec_up / 255
         spec_d = spec_d / 255
