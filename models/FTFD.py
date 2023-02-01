@@ -166,7 +166,7 @@ class MultimodalModel(nn.Module):
                                           
                                           
     def forward(self,x):
- 
+        print(x[0].shape)
         img,audio_up,audio_d = x
         if self.audio_size_default==384:
             audio_d = self.default_audio(audio_d)
@@ -175,10 +175,12 @@ class MultimodalModel(nn.Module):
             audio_d = self.default_audio_inp(audio_d)
             audio_d = self.default_audio(audio_d)
             audio_d = self.default_audio0(audio_d)
+
         
         avam = self.resblock1(self.avam1(img,audio_up))
         audio_up = self.upsampled_audio1(audio_up)
         audio_d = self.default_audio1(audio_d)
+        print(avam.shape)
         
         avam = self.resblock2(self.avam2(avam,audio_up))
         audio_up = self.upsampled_audio2(audio_up)
